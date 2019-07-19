@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<style>
+		table
+		{
+			margin: auto;
+			margin-top: 200px;
+		}
+		
+		tr
+		{
+			width: 500px;
+			height: 80px;
+		}
+		
+		.classA
+		{
+			width: 300px;
+			height: 30px;
+		}
+		
+		 #button
+		{
+			width: 50px;
+			height: 30px;
+		}
+	</style>
+	
+	
+	<script type="text/javascript" src="jq/jquery.js" ></script>
+	<script>
+		
+		$(document).ready(function(){ 
+　　			$("#button").click(function(){
+				
+				var account = $("input[name='account']").val();
+				var password = $("input[name='password']").val();
+				var conpassword = $("input[name='conpassword']").val();
+				var name = $("input[name='name']").val();
+				var birth = $("input[name='birth']").val();
+				var sex = $("input[name='sex']").val();
+				
+				if(account == "")
+				{
+					alert("请输入账号");
+					return;
+				}
+				
+				if(password == "")
+				{
+					alert("请输入密码");
+					return;
+				}
+				
+				if(name == "")
+				{
+					alert("请输入昵称");
+					return;
+				}
+				
+				if(birth == "")
+				{
+					alert("请选择生日");
+					return;
+				}
+				
+				if(sex == "")
+				{
+					alert("请选择性别");
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"localhost:8081/insertuser",
+					async:true,
+					dataType:"json",
+					data:{
+						"account":account,
+						"password":password,
+						"name":name,
+						"birth":birth,
+						"sex":sex
+					},
+					success:function()
+					{
+						alert(res.result);
+					}
+				});
+				
+			})
+		}); 
+		
+	</script>
+		
+		
+	
+	
+	<body>
+		<table>
+			<tr>
+				<td>账号：</td>
+				<td>
+					<input type="text" name="account" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>密码：</td>
+				<td>
+					<input type="password" name="password" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>确认密码：</td>
+				<td>
+					<input type="password" name="conpassword" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>昵称：</td>
+				<td>
+					<input type="text" name="name" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>生日：</td>
+				<td>
+					<input type="date" name="birth" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>性别：</td>
+				<td>
+					<label class="single"><input type="radio" name="sex" value="male" />男</label>
+					<label class="single"><input type="radio" name="sex" value="female" />女</label>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>验证码：</td>
+				<td>
+					<input type="datetime" class="classA" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center">
+					<input id="button" type="button" value="注册"/>
+				</td>
+			</tr>
+			
+		</table>
+	</body>
+</html>
